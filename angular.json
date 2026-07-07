@@ -32,6 +32,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "./tictactoe_Angular/",
               "budgets": [
                 {
                   "type": "initial",

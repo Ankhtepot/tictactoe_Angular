@@ -1,0 +1,13 @@
+.board {
+  display: grid;
+  width: 90vw;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+  grid-template-columns: repeat(var(--size), 1fr);
+  grid-template-rows: repeat(var(--size), 1fr);
+  gap: 0.5em;
+  border-radius: 1em;
+  padding: 0.5em;
+  border: 8px ridge greenyellow;
+  box-sizing: border-box;
+}

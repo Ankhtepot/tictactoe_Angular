@@ -1,0 +1,5 @@
+<div class="board" [style.--size]="boardService.boardSize()">
+  @for (cell of boardService.board(); track i; let i = $index) {
+    <app-cell [state]="cell" [index]="i"></app-cell>
+  }
+</div>

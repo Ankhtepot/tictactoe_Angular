@@ -1,0 +1,9 @@
+<div class="container" [class.hidden]="gameState() === GAME_STATE.STARTED">
+  <button class="icon-button" (click)="onSizeLower()" [disabled]="gameState() == GAME_STATE.STARTED">
+    <lucide-icon [img]="ArrowBigDown"></lucide-icon>
+  </button>
+  <p>{{ boardSize() }}</p>
+  <button class="icon-button" (click)="onSizeRaise()" [disabled]="gameState() == GAME_STATE.STARTED">
+    <lucide-icon [img]="ArrowBigUp"></lucide-icon>
+  </button>
+</div>

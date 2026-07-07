@@ -1,0 +1,15 @@
+<div class="container">
+  @if(boardService.gameState() === GAME_STATE.STOPPED) {
+    <p>{{ gameReadyText }}</p>
+  } @else if (boardService.gameState() === GAME_STATE.WON) {
+    Player "<span [style.color]="boardService.currentPlayer() === 'X' ? 'coral' : 'green'">{{ boardService.currentPlayer() === 'X' ? 'X' : 'O' }}</span>" wins!
+  } @else if (boardService.gameState() === GAME_STATE.DRAW) {
+    <p>{{ gameDrawText }}</p>
+  } @else {
+    <p>Current player's turn: "</p>
+    <span [style.color]="boardService.currentPlayer() === 'X' ? 'coral' : 'green'">
+      {{ boardService.currentPlayer() === 'X' ? 'X' : 'O' }}
+    </span>
+    "
+  }
+</div>

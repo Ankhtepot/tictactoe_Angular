@@ -1,0 +1,28 @@
+<div class="cell-container">
+  <button
+    class="cell"
+    (click)="onClick()"
+    [class.finished]="boardService.gameState() === GAME_STATE.WON
+                      && boardService.winningLine()?.includes(index())"
+  >
+    @if (state() === 'X') {
+      <lucide-icon
+        [img]="XIcon"
+        class="x-icon"
+        [class.finished]="boardService.gameState() === GAME_STATE.WON"
+        [class.winner]="boardService.gameState() === GAME_STATE.WON
+                        && boardService.winningLine()?.includes(index())"
+      ></lucide-icon>
+    } @else if (state() === 'O') {
+      <lucide-icon
+        [img]="Circle"
+        class="o-icon"
+        [class.finished]="boardService.gameState() === GAME_STATE.WON"
+        [class.winner]="boardService.gameState() === GAME_STATE.WON
+                        && boardService.winningLine()?.includes(index())"
+      ></lucide-icon>
+    } @else {
+      <div class="empty-cell"></div>
+    }
+  </button>
+</div>

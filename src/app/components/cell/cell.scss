@@ -1,0 +1,59 @@
+.cell-container {
+  width: 100%;
+  height: 100%;
+
+  button {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 0.3em;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+
+    &.finished {
+      border: black 2px solid;
+
+    }
+
+    lucide-icon {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: lightblue;
+
+      &.finished {
+        background-color: lightgreen;
+
+        &.winner {
+          background-color: gold;
+          border-radius: 0.3em;
+        }
+      }
+
+      ::ng-deep svg {
+        width: 80% !important;
+        height: 80% !important;
+        stroke-width: 2.5px;
+      }
+
+      &.x-icon ::ng-deep svg {
+        width: 85% !important;
+        height: 85% !important;
+      }
+
+      &.o-icon ::ng-deep svg {
+        width: 75% !important;
+        height: 75% !important;
+      }
+    }
+
+    .empty-cell {
+      width: 100%;
+      height: 100%;
+      background-color: beige;
+    }
+  }
+}
