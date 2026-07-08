@@ -3,13 +3,15 @@ import {SizeChange} from '../size-change/size-change';
 import {Board} from '../board/board';
 import {GameStatus} from '../game-status/game-status';
 import {BoardService} from '../../services/board-service';
+import {History} from '../history/history';
 
 @Component({
   selector: 'app-game',
   imports: [
     SizeChange,
     Board,
-    GameStatus
+    GameStatus,
+    History
   ],
   templateUrl: './game.html',
   styleUrl: './game.scss',

@@ -1,24 +1,25 @@
 :host {
   display: block;
-  width: 100%;
-  height: 100%;
+  min-height: 100vh;
 }
 
 .container {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   //max-width: 800px;
   //margin: 0 auto;
-  padding: 2em;
-  //background-color: beige;
+  padding: 2rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-content: center;
-  justify-content: center;
+  justify-content: flex-start; // Start from top to allow scrolling
   background: #37CE42;
   background: -moz-linear-gradient(left, #37CE42 0%, #99FF5B 50%, #37CE42 100%);
   background: -webkit-linear-gradient(left, #37CE42 0%, #99FF5B 50%, #37CE42 100%);
   background: linear-gradient(to right, #37CE42 0%, #99FF5B 50%, #37CE42 100%);
+}
+
+app-game {
+  margin: auto 0; // Centers game vertically if there's space
 }

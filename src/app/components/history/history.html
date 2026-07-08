@@ -1,0 +1,8 @@
+<div class="history">
+  <p class="history-title standard_text">History</p>
+  <div class="buttons_wrap">
+    @for (move of boardService.history(); track i; let i = $index) {
+      <button (click)="boardService.switchToHistory(i)">Move {{ i + 1 }}</button>
+    }
+  </div>
+</div>

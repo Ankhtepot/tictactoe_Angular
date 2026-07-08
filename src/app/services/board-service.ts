@@ -73,7 +73,6 @@ const isWinner = (board: CellState[], player: CellState): WinData => {
   // diagonal /
   for (let lineNr = 0; lineNr < size; lineNr++) {
     let testedIndex = lineNr * size + size - 1 - lineNr;
-    console.log(testedIndex);
     if (board[testedIndex] !== player)
       break;
 
@@ -96,12 +95,15 @@ export class BoardService {
   private _currentPlayer = signal<CellState>('X');
   private _gameState = signal<GameState>('Stop');
   private _winningLine = signal<number[] | null>(null);
+  private _currentMove = signal<number>(0);
+  private _history = signal<CellState[][]>([]);
 
   boardSize = this._boardSize.asReadonly();
   board: Signal<CellState[]> = this._board;
   currentPlayer = this._currentPlayer.asReadonly();
   gameState = this._gameState.asReadonly();
   winningLine = this._winningLine.asReadonly();
+  history = this._history.asReadonly();
 
   constructor() {
   }
@@ -125,6 +127,8 @@ export class BoardService {
     this._currentPlayer.set('X');
     this._gameState.set(GAME_STATE.STOPPED);
     this._winningLine.set(null);
+    this._currentMove.set(0);
+    this._history.set([]);
   }
 
   handlePlayerClickOnIndex(callIndex: number) {
@@ -134,17 +138,46 @@ export class BoardService {
         newBoard[callIndex] = this._currentPlayer();
         return newBoard;
       });
+
+      this._currentMove.update(move => move + 1);
+      this._history.update(history => [...history.splice(0, this._currentMove()), this._board()]);
+
       this._gameState.set(GAME_STATE.STARTED);
 
-      const winData = isWinner(this._board(), this._currentPlayer());
-      if (winData.won) {
-        this._gameState.set(GAME_STATE.WON);
-        this._winningLine.set(winData.winningLine);
-      } else if (this._board().filter(cell => cell === null).length === 0) {
-        this._gameState.set(GAME_STATE.DRAW);
-      } else {
-        this._currentPlayer.set(this._currentPlayer() === 'X' ? 'O' : 'X');
+      this.checkWinner();
+
+      if (this._gameState() === GAME_STATE.STARTED) {
+        this._currentPlayer.update(player => player === 'X' ? 'O' : 'X');
       }
+    }
+  }
+
+  switchToHistory(moveIndex:number) {
+    this._board.set(this._history()[moveIndex]);
+    const movePlayer = moveIndex % 2 === 0 ? 'O' : 'X';
+    this._currentMove.set(moveIndex);
+    this._gameState.set(GAME_STATE.STARTED);
+
+    // For following checkWinner(), we need to check the player who made the last move, which is the opposite of the current player after switching to history.
+    const lastPlayer = movePlayer === 'X' ? 'O' : 'X';
+    this._currentPlayer.set(lastPlayer);
+    this.checkWinner(lastPlayer);
+
+    if (this._gameState() !== GAME_STATE.WON) {
+      this._currentPlayer.set(movePlayer); // Set back to the player who should play next if the game is still going on
+    }
+  }
+
+  private checkWinner(checkedPlayer: CellState = this._currentPlayer()) {
+    const winData = isWinner(this._board(), checkedPlayer);
+    if (winData.won) {
+      this._gameState.set(GAME_STATE.WON);
+      this._winningLine.set(winData.winningLine);
+    } else if (this._board().filter(cell => cell === null).length === 0) {
+      this._gameState.set(GAME_STATE.DRAW);
+      this._winningLine.set(null);
+    } else {
+      this._winningLine.set(null);
     }
   }
 }

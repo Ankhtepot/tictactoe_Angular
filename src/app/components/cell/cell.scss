@@ -28,7 +28,10 @@
         background-color: lightgreen;
 
         &.winner {
-          background-color: gold;
+          background: #FFD700;
+          background: -moz-radial-gradient(center, #FFD700 0%, #FFD700 54%, #C59337 100%);
+          background: -webkit-radial-gradient(center, #FFD700 0%, #FFD700 54%, #C59337 100%);
+          background: radial-gradient(ellipse at center, #FFD700 0%, #FFD700 54%, #C59337 100%);
           border-radius: 0.3em;
         }
       }

@@ -18,17 +18,14 @@ Once the server is running, open your browser and navigate to `http://localhost:
 To build the project run:
 
 ```bash
-ng build
-
-ng build --prod --base-href=/tictactoe-Angular/ /*might be obsolete*/
-ng build --configuration production --base-href=/tictactoe-Angular/
-
+npm run build:prod
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
 ## Deploying on gh-pages
+Build & deploy to gh-pages:
 
 ```bash
-npx angular-cli-ghpages --dir=dist/tic-tac-toe/browser
+npm run deploy
 ```
